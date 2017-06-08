@@ -52,6 +52,8 @@ else:
 		ahead = len([x for x in behead if x[0]=='>'])
 		behind = len(behead) - ahead
 
+last_commit_date = Popen(['git', 'log', '-1', '--format=%cd', '--date=relative'], stdout=PIPE).communicate()[0].decode("utf-8").strip().replace(' ', '·')
+
 out = ' '.join([
 	branch,
 	str(ahead),
@@ -60,6 +62,7 @@ out = ' '.join([
 	conflicts,
 	changed,
 	untracked,
+	last_commit_date,
 	])
 print(out, end='')
 
